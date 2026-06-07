@@ -7,25 +7,39 @@ char canvas[ROWS][COLS];
 
 void initCanvas()
 {
-    int i, j;
-    for(i = 0; i < ROWS; i++)
+    int i,j;
+
+    for(i=0;i<ROWS;i++)
+        for(j=0;j<COLS;j++)
+            canvas[i][j]=' ';
+}
+
+void drawRectangle(int row,int col,int height,int width)
+{
+    int i,j;
+
+    for(i=row;i<row+height;i++)
     {
-        for(j = 0; j < COLS; j++)
+        for(j=col;j<col+width;j++)
         {
-            canvas[i][j] = ' ';
+            if(i==row || i==row+height-1 ||
+               j==col || j==col+width-1)
+            {
+                canvas[i][j]='*';
+            }
         }
     }
 }
 
 void displayCanvas()
 {
-    int i, j;
-    for(i = 0; i < ROWS; i++)
+    int i,j;
+
+    for(i=0;i<ROWS;i++)
     {
-        for(j = 0; j < COLS; j++)
-        {
-            printf("%c", canvas[i][j]);
-        }
+        for(j=0;j<COLS;j++)
+            printf("%c",canvas[i][j]);
+
         printf("\n");
     }
 }
@@ -33,7 +47,9 @@ void displayCanvas()
 int main()
 {
     initCanvas();
-    printf("2D Graphics Editor\n");
+
+    drawRectangle(2,5,6,12);
+
     displayCanvas();
 
     return 0;
